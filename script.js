@@ -16,3 +16,15 @@ console.log(document.querySelector('.message').textContent);
 //and is stored in a tree structure in which each HTML element is one obj
 //The DOM always starts with the document obj at the very top, it the entry point into the DOM
 //In the DOM body and head are adjacent element/siblings they have priority over the other one.
+
+//Selection and Manipulating Elements
+//Change the text of an element through DOM manipulation
+document.querySelector('.message').textContent = 'Correct Number';
+
+//is the element has a number but also some text then use textContent
+document.querySelector('.number').textContent = 13;
+document.querySelector('.score').textContent = 10;
+
+//to retrieve an input field here "guess" we use the value property
+console.log(document.querySelector('.guess').value);
+document.querySelector('.guess').value = 23;
