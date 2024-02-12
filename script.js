@@ -17,6 +17,7 @@ console.log(document.querySelector('.message').textContent);
 //The DOM always starts with the document obj at the very top, it the entry point into the DOM
 //In the DOM body and head are adjacent element/siblings they have priority over the other one.
 
+/*
 //Selection and Manipulating Elements
 //Change the text of an element through DOM manipulation
 document.querySelector('.message').textContent = 'Correct Number';
@@ -28,3 +29,25 @@ document.querySelector('.score').textContent = 10;
 //to retrieve an input field here "guess" we use the value property
 console.log(document.querySelector('.guess').value);
 document.querySelector('.guess').value = 23;
+*/
+
+//Handling Click Events
+//an Event is something that happens on the page like a mouse click
+//an Event Listener waits for a certain event to happen and react to it
+//1) select the element where the event should happen here the check button
+//2) wait, listen for a change with addEventListener()
+//the first parameter is the type of the event here a click
+//the second parameter is telling what to do here a function value "funciton() {}"
+//containing to code to execute when there is a click
+//rememeber a funciton is just a value
+//because string a is a string we first must convert it to a number with Number
+//here we retrieve the input value and send it to the console log
+document.querySelector('.check').addEventListener('click', function () {
+  const guess = Number(document.querySelector('.guess').value);
+  console.log(guess, typeof guess);
+
+  //check if there is a valeu for guess and print a message on screen if none
+  if (!guess) {
+    document.querySelector('.message').textContent = 'No Number';
+  }
+});
