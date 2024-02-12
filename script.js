@@ -42,12 +42,40 @@ document.querySelector('.guess').value = 23;
 //rememeber a funciton is just a value
 //because string a is a string we first must convert it to a number with Number
 //here we retrieve the input value and send it to the console log
+
+//define a random number to guess
+const secretNumber = Math.trunc(Math.random() * 20) + 1;
+//this a state var because it is part of the application state
+//the application state contains all the data that is relevant to the application
+let score = 20;
+document.querySelector('.number').textContent = secretNumber;
+
 document.querySelector('.check').addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value);
   console.log(guess, typeof guess);
 
-  //check if there is a valeu for guess and print a message on screen if none
+  //check if there is a value for guess and print a message on screen if none
   if (!guess) {
     document.querySelector('.message').textContent = 'No Number';
+  } else if (guess === secretNumber) {
+    document.querySelector('.message').textContent = 'Correct Number';
+  } else if (guess > secretNumber) {
+    if (score > 1) {
+      document.querySelector('.message').textContent = 'Too Low';
+      score--;
+      document.querySelector('.score').textContent = score;
+    } else {
+      document.querySelector('.score').textContent = 0;
+      document.querySelector('.message').textContent = 'Game Over';
+    }
+  } else if (guess < secretNumber) {
+    if (score > 1) {
+      document.querySelector('.message').textContent = 'Too High';
+      score--;
+      document.querySelector('.score').textContent = score;
+    } else {
+      document.querySelector('.score').textContent = 0;
+      document.querySelector('.message').textContent = 'Game Over';
+    }
   }
 });
