@@ -50,15 +50,20 @@ let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
 let highScore = 0;
 
+const displayMessage = function (element, message) {
+  document.querySelector(element).textContent = message;
+};
+
 document.querySelector('.again').addEventListener('click', function () {
   score = 20;
   secretNumber = Math.trunc(Math.random() * 20) + 1;
-  document.querySelector('.message').textContent = 'Start Guessing...';
-  document.querySelector('score').textContent = '20';
+  //   document.querySelector('.message').textContent = 'Start Guessing...';
+  displayMessage('.message', 'Start guessing...');
+  displayMessage('.score', '20');
   document.querySelector('.guess').value = '';
   document.querySelector('body').style.backgroundColor = '#222';
   document.querySelector('.number').style.width = '15rem';
-  document.querySelector('.number').textContent = '?';
+  displayMessage('.number', '?');
 });
 
 document.querySelector('.check').addEventListener('click', function () {
@@ -67,37 +72,37 @@ document.querySelector('.check').addEventListener('click', function () {
 
   //check if there is a value for guess and print a message on screen if none
   if (!guess) {
-    document.querySelector('.message').textContent = 'No Number';
+    displayMessage('.message', 'No Number');
   } else if (guess === secretNumber) {
-    document.querySelector('.message').textContent = 'Correct Number';
-    //change the style of body
+    displayMessage('.message', 'Correct Number'); //change the style of body
     //we must use camel casing for styles attribute when in JS
     //when manipulating a style we must always use a string
     //these are inline styles so we are not really changing the CSS
     document.querySelector('body').style.backgroundColor = '#60b347';
     document.querySelector('.number').style.width = '30rem';
-    document.querySelector('.number').textContent = secretNumber;
+    displayMessage('.number', secretNumber);
     if (score > highScore) {
       highScore = score;
-      document.querySelector('.highscore').textContent = highScore;
+      displayMessage('.highscore', highScore);
     }
-  } else if (guess > secretNumber) {
+  } else if (guess !== secretNumber) {
     if (score > 1) {
-      document.querySelector('.message').textContent = 'Too High';
+      displayMessage('.message', guess > secretNumber ? 'Too High' : 'Too Low');
       score--;
-      document.querySelector('.score').textContent = score;
+      displayMessage('.score', score);
     } else {
-      document.querySelector('.score').textContent = 0;
-      document.querySelector('.message').textContent = 'Game Over';
-    }
-  } else if (guess < secretNumber) {
-    if (score > 1) {
-      document.querySelector('.message').textContent = 'Too Low';
-      score--;
-      document.querySelector('.score').textContent = score;
-    } else {
-      document.querySelector('.score').textContent = 0;
-      document.querySelector('.message').textContent = 'Game Over';
+      displayMessage('.score', 0);
+      displayMessage('.message', 'Game Over');
     }
   }
+  //   else if (guess < secretNumber) {
+  //     if (score > 1) {
+  //       document.querySelector('.message').textContent = 'Too Low';
+  //       score--;
+  //       document.querySelector('.score').textContent = score;
+  //     } else {
+  //       document.querySelector('.score').textContent = 0;
+  //       document.querySelector('.message').textContent = 'Game Over';
+  //     }
+  //   }
 });
